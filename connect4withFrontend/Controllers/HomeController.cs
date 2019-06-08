@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using connect4withFrontend.Models;
+using static connect4withFrontend.Models.Board;
 
 namespace connect4withFrontend.Controllers
 {
@@ -10,21 +12,12 @@ namespace connect4withFrontend.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            State[,] board = new State[6, 7]; 
+
+
+
+            return View(board);
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
     }
 }

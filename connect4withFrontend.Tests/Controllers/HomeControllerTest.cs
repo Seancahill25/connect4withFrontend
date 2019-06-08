@@ -3,52 +3,89 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using connect4withFrontend;
 using connect4withFrontend.Controllers;
+using connect4withFrontend.Models;
+using NUnit.Framework;
+using static connect4withFrontend.Models.Board;
 
 namespace connect4withFrontend.Tests.Controllers
 {
-    [TestClass]
+    [TestFixture]
     public class HomeControllerTest
     {
-        [TestMethod]
-        public void Index()
+        public State[,] board = new State[6, 7];
+        State X = State.X;
+        State O = State.O;
+        State B = State.B;
+
+
+        [Test]
+        public void ReturnEmptyBoard()
         {
-            // Arrange
-            HomeController controller = new HomeController();
+            State[,] input = new State[,]
+            {
+                { B, B, B, B, B, B, B },
+                { B, B, B, B, B, B, B },
+                { B, B, B, B, B, B, B },
+                { B, B, B, B, B, B, B },
+                { B, B, B, B, B, B, B },
+                { B, B, B, B, B, B, B }
+            };
+            bool output = Board.CheckForHorizontalWinner(input);
+            bool expected = false;
 
-            // Act
-            ViewResult result = controller.Index() as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
+            Assert.AreEqual(expected, output);
         }
 
-        [TestMethod]
-        public void About()
+        [Test]
+        public void ReturnTrueIf4InARowHorizontal()
         {
-            // Arrange
-            HomeController controller = new HomeController();
+            State[,] input = new State[,] 
+            {
+                { X, X, B, O, B, B, B },
+                { B, B, B, B, B, B, B },
+                { B, O, X, B, X, B, O },
+                { B, B, B, B, B, B, B },
+                { B, B, X, O, O, O, O },
+                { B, X, X, B, X, B, B }
+            };
+            bool ouput = Board.CheckForHorizontalWinner(input);
+            bool expected = true;
 
-            // Act
-            ViewResult result = controller.About() as ViewResult;
-
-            // Assert
-            Assert.AreEqual("Your application description page.", result.ViewBag.Message);
+            Assert.AreEqual(expected, ouput);
         }
 
-        [TestMethod]
-        public void Contact()
+        [Test]
+        public void ReturnTrueIfFourXInARowVertically()
         {
-            // Arrange
-            HomeController controller = new HomeController();
+            State[,] input = new State[,] {
+                { B, X, X, X, B, B, B },
+                { B, B, B, B, B, B, B },
+                { B, X, B, B, B, B, B },
+                { B, X, B, B, O, O, O },
+                { B, X, B, B, B, B, B },
+                { B, X, B, B, B, B, B }
+            };
+            bool actual = Board.CheckForVerticalWinner(input);
+            bool expected = true;
+            Assert.AreEqual(expected, actual);
+        }
 
-            // Act
-            ViewResult result = controller.Contact() as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
+        [Test]
+        public void ReturnTrueIfFourOInARowVertically()
+        {
+            State[,] input = new State[,] {
+                { B, X, X, X, B, B, B },
+                { B, B, B, B, B, B, B },
+                { B, B, B, B, O, B, B },
+                { B, X, B, B, O, O, O },
+                { B, X, B, B, O, B, B },
+                { B, X, B, B, O, B, B }
+            };
+            bool actual = Board.CheckForVerticalWinner(input);
+            bool expected = true;
+            Assert.AreEqual(expected, actual);
         }
     }
 }
