@@ -14,8 +14,6 @@ namespace connect4withFrontend.Controllers
         {
             State[,] board = new State[6, 7]; 
 
-
-
             return View(board);
         }
 

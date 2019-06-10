@@ -19,7 +19,6 @@ namespace connect4withFrontend.Tests.Controllers
         State O = State.O;
         State B = State.B;
 
-
         [Test]
         public void ReturnEmptyBoard()
         {
@@ -32,7 +31,7 @@ namespace connect4withFrontend.Tests.Controllers
                 { B, B, B, B, B, B, B },
                 { B, B, B, B, B, B, B }
             };
-            bool output = Board.CheckForHorizontalWinner(input);
+            bool output = Board.CheckForWinner(input);
             bool expected = false;
 
             Assert.AreEqual(expected, output);
@@ -43,14 +42,14 @@ namespace connect4withFrontend.Tests.Controllers
         {
             State[,] input = new State[,] 
             {
-                { X, X, B, O, B, B, B },
+                { X, X, X, X, B, B, B },
                 { B, B, B, B, B, B, B },
                 { B, O, X, B, X, B, O },
                 { B, B, B, B, B, B, B },
-                { B, B, X, O, O, O, O },
+                { B, B, X, B, O, O, O },
                 { B, X, X, B, X, B, B }
             };
-            bool ouput = Board.CheckForHorizontalWinner(input);
+            bool ouput = Board.CheckForWinner(input);
             bool expected = true;
 
             Assert.AreEqual(expected, ouput);
@@ -60,14 +59,14 @@ namespace connect4withFrontend.Tests.Controllers
         public void ReturnTrueIfFourXInARowVertically()
         {
             State[,] input = new State[,] {
-                { B, X, X, X, B, B, B },
+                { X, B, X, X, B, B, B },
+                { X, B, B, B, B, B, B },
+                { X, B, B, B, B, B, B },
+                { X, B, B, B, O, O, O },
                 { B, B, B, B, B, B, B },
-                { B, X, B, B, B, B, B },
-                { B, X, B, B, O, O, O },
-                { B, X, B, B, B, B, B },
-                { B, X, B, B, B, B, B }
+                { B, B, B, B, B, B, B }
             };
-            bool actual = Board.CheckForVerticalWinner(input);
+            bool actual = Board.CheckForWinner(input);
             bool expected = true;
             Assert.AreEqual(expected, actual);
         }
@@ -83,7 +82,7 @@ namespace connect4withFrontend.Tests.Controllers
                 { B, X, B, B, O, B, B },
                 { B, X, B, B, O, B, B }
             };
-            bool actual = Board.CheckForVerticalWinner(input);
+            bool actual = Board.CheckForWinner(input);
             bool expected = true;
             Assert.AreEqual(expected, actual);
         }
