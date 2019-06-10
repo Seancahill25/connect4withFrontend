@@ -42,6 +42,12 @@ namespace connect4withFrontend.Models
 
                         if (row >= 3 && currentCell == board[row - 1, column] && currentCell == board[row - 2, column] && currentCell == board[row - 3, column])
                             return true;
+
+                        if (column >= 3 && row >= 3 && currentCell == board[row - 1, column - 1] && currentCell == board[row - 2, column - 2] && currentCell == board[row - 3, column - 3])
+                            return true;
+
+                        if (column <= 3 && row >= 3 && currentCell == board[row - 1, column + 1] && currentCell == board[row - 2, column + 2] && currentCell == board[row - 3, column + 3])
+                            return true;
                     }
                 }
             }

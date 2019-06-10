@@ -86,5 +86,37 @@ namespace connect4withFrontend.Tests.Controllers
             bool expected = true;
             Assert.AreEqual(expected, actual);
         }
+
+        [Test]
+        public void ReturnTrueIfFourOInARowDiagonalLeft()
+        {
+            State[,] input = new State[,] {
+                { X, B, B, B, B, B, B },
+                { B, X, B, B, B, B, B },
+                { B, B, X, B, B, B, B },
+                { B, B, B, X, B, B, B },
+                { B, B, B, B, B, B, B },
+                { B, B, B, B, B, B, B }
+            };
+            bool actual = Board.CheckForWinner(input);
+            bool expected = true;
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void ReturnTrueIfFourOInARowDiagonalRight()
+        {
+            State[,] input = new State[,] {
+                { X, B, B, B, B, B, O },
+                { B, X, B, B, B, O, B },
+                { B, B, X, B, O, B, B },
+                { B, B, B, O, B, B, B },
+                { B, B, B, B, B, B, B },
+                { B, B, B, B, B, B, B }
+            };
+            bool actual = Board.CheckForWinner(input);
+            bool expected = true;
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
